@@ -39,7 +39,7 @@ class Bird {
     this.g = 30;
     this.fit = 0;
     if (this.brain == undefined) {
-      this.brain = new Neuralnetwork(4, 8, 2);
+      this.brain = new Neuralnetwork(6, 8, 1);
     }
   }
   // 两只鸟之间进行繁殖，产生新的后代鸟
@@ -84,13 +84,15 @@ class Bird {
     let output = this.brain!.predict([
       tube.x / viewWidth,
       tube.height / viewHeight,
-      (tube.height + openL) / viewHeight,
+      (viewHeight - tube.height - openL) / viewHeight,
       this.y / viewHeight,
+      (tube.height - this.y) / viewHeight,
+      (viewHeight - tube.height - openL - this.y) / viewHeight,
     ]);
     if (output.data[0][0] > 0.5) {
       this.bspeed -= 11;
     }
-    this.g += output.data[1][0];
+    // this.g += output.data[1][0];
     this.bspeed += this.g * delta;
 
     if (this.bspeed > max_bspeed) {
