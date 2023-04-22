@@ -3,6 +3,7 @@ import {
   generation,
   incBirdScore,
   population,
+  retention_ratio,
   setBestScore,
   setGeneration,
   truncateNearestTube,
@@ -59,7 +60,7 @@ class Group {
       setGeneration(); // 增加代数计数器
       truncateNearestTube(); // 重置最近管道编号
       truncateVisualScore(); // 重置当前得分
-      const chooseBirs = this.choose(0.01); // 根据适应度选择一定比例的小鸟作为后代的父母
+      const chooseBirs = this.choose(retention_ratio); // 根据适应度选择一定比例的小鸟作为后代的父母
       // console.log("leave " + chooseBirs.length);
       const tS = this.getTotalScore(chooseBirs); // 计算总适应度
       for (let i = 0; i < chooseBirs.length; i++) {

@@ -13,7 +13,7 @@ class Neuralnetwork {
   wightOH: Matrix; // 隐藏层到输出层的权重矩阵
   bisaH: Matrix; // 隐藏层的偏置向量
   bisaO: Matrix; // 输出层的偏置向量
-  static mutateRate: number = 0.1; // 变异率（静态属性）
+  static mutateRate: number = 0.01; // 变异率（静态属性）
 
   constructor(numInput: number, numHidden: number, numOutput: number) {
     this.numInput = numInput;

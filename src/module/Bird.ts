@@ -27,6 +27,8 @@ class Bird {
   brain: Neuralnetwork | undefined = undefined;
   g: number;
   fit: number;
+  // birdImg: HTMLImageElement = new Image();
+  // birdStateIndex: number;
   //定义一个构造函数，用于创建小鸟实例时初始化其属性。
   //如果没有传入大脑参数，则创建一个新的具有 4 个输入、8 个隐藏和 2 个输出的神经网络作为小鸟对象的大脑。
   constructor(brain?: Neuralnetwork) {
@@ -82,12 +84,12 @@ class Bird {
     if (this.isDead) return;
     let tube = this.getNearestTube(tubes);
     let output = this.brain!.predict([
-      tube.x / viewWidth,
-      tube.height / viewHeight,
-      (viewHeight - tube.height - openL) / viewHeight,
-      this.y / viewHeight,
-      (tube.height - this.y) / viewHeight,
-      (viewHeight - tube.height - openL - this.y) / viewHeight,
+      tube.x / viewWidth, //管道在图中的位置 百分比
+      tube.height / viewHeight,//上管道的下边界在图中的位置 百分比
+      (viewHeight - tube.height - openL) / viewHeight, //下管道的上边界在图中的位置 百分比
+      this.y / viewHeight, //小鸟的纵坐标在图中的位置 百分比
+      (tube.height - this.y) / viewHeight, //上管道的高度 百分比
+      (viewHeight - tube.height - openL - this.y) / viewHeight, //小鸟的位置距离下管道上边界的距离 百分比
     ]);
     if (output.data[0][0] > 0.5) {
       this.bspeed -= 11;

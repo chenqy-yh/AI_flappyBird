@@ -16,23 +16,22 @@ import { nextTick } from "vue";
 nextTick(() => {
   // 创建画布实例
   const canvas = new Canvas(".container");
-
+  const ctx = canvas.ctx!;
   // 获取滑动条元素并创建障碍物和游戏精灵群组实例
   const slider = document.querySelector("#slider") as HTMLInputElement;
   const tubes = new Tubes();
   const group = new Group();
-
   function animate() {
     // 渲染画布
     canvas.render();
 
-    // 根据滑动条值更新多个游戏帧
+    // // 根据滑动条值更新多个游戏帧
     for (let i = 0; i < (slider.value as unknown as number); i++) {
       tubes.update(); // 更新障碍物
       group.update(tubes); // 更新精灵群组
     }
 
-    // 渲染障碍物和精灵群组
+    // // 渲染障碍物和精灵群组
     tubes.render(canvas.ctx!);
     group.render(canvas.ctx!);
 
